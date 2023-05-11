@@ -1,4 +1,4 @@
-//tp1
+//tp1 comisión 1
 //Izurieta Lucía 92630/2
 int tiempo;
 int tam;
