@@ -1,5 +1,4 @@
-
- class Diario {
+class Diario {
  constructor(fila, columna, tam) {
     this.fila = fila;
     this.columna = columna;
@@ -18,8 +17,8 @@
   }
 
   colision(x, y, tam) {
-    let distancia = dist(
-      this.columna * juego.laberinto.tam + juego.laberinto.tam / 2,
+    let distancia = dist (
+     this.columna * juego.laberinto.tam + juego.laberinto.tam / 2,
       this.fila * juego.laberinto.tam + juego.laberinto.tam / 2,
       x + tam / 2,
       y + tam / 2
