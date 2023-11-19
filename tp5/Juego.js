@@ -64,7 +64,6 @@ class Juego {
           }
         }
       }
-      // Si no, continúa mostrando el juego
       fill(255);
       text('TIEMPO: ' + floor((millis() - this.tiempoInicio) / 1000) + ' SEGUNDOS', 300, 50);
 
