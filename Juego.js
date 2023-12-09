@@ -6,8 +6,10 @@ class Juego {
     this.imgpersonaje = loadImage('data/soldado.png');
     this.imgcafe = loadImage('data/cafe.png');
     this.imgcupula = loadImage('data/cupula.png');
+
     this.objlaberinto = new Laberinto();
     this.objjugador = new Personaje(10, 80, 30, this.objlaberinto, this.imgpersonaje);
+    this.tiempoInicio = millis();
     this.elementosComida = [
       new Comida(90, 185, this.imgcafe),
       new Comida(180, 310, this.imgcafe),
@@ -19,18 +21,21 @@ class Juego {
     this.cupula = new Cupula(750, 210, this.imgcupula);
     this.jugadorGano = false;
 
-    this.tiempo = 0;
+    this.tiempoLimite = 60;
+    this.cuadrosTranscurridos = 0;
     this.estadoJuego = "INSTRUCCIONES";
   }
 
 
   iniciarJuego() {
-    // empieza el juego
+    // arranca el juego
     this.cuadrosTranscurridos = 0;
     this.jugadorGano = false;
     this.objjugador.x = 10;
     this.objjugador.y = 80;
     this.cupula.recolectado = false;
+    this.tiempoInicio = millis();
+    this.tiempoLimite = 60;
     this.estadoJuego = "JUEGO";
 
 
@@ -38,7 +43,6 @@ class Juego {
       this.elementosComida[i].recolectado = false;
     }
     if (this.estadoJuego === "JUEGO") {
-      loop();
     }
   }
 
@@ -64,48 +68,53 @@ class Juego {
     this.cupula.mostrar();
     let comidaRecolectada = this.elementosComida.filter(comida => comida.recolectado).length;
 
-    //condicion derrota
+    // Condición de victoria
     if (comidaRecolectada === this.elementosComida.length && !this.jugadorGano &&
       this.cupula.colision(this.objjugador.x, this.objjugador.y, this.objjugador.tamano)) {
       this.jugadorGano = true;
       this.cupula.recolectado = true;
-      // muestra msj victoria
+      this.estadoJuego = "VICTORIA";
+      // Muestra mensaje de victoria
       textSize(40);
-      fill(255);
+      fill(0);
       textAlign(CENTER, CENTER);
       text("¡Has ganado!", width / 2, height / 2);
       textSize(29);
-      text("¡Intenta mejorar tu tiempo, juga de nuevo presionando R!", width / 2, 500);
+      text("¡Intenta mejorar tu tiempo, juega de nuevo presionando R!", width / 2, 500);
       noLoop();
     }
 
+
     // Contador de tiempo
- 
- if (frameCount %60 == 0) {
-      this.tiempo++;
-    }
-      textSize(20);
+    if (this.estadoJuego === "JUEGO") {
+      this.cuadrosTranscurridos++;
+      let tiempoTranscurrido = Math.floor((millis() - this.tiempoInicio) / 1000);
+
+      textSize(24);
       fill(255);
-      rect(540, 0, 250, 60);
+      rect(width - 250, 0, 250, 50);
       fill(0);
-   text("TIEMPO: " + this.tiempo + " SEGUNDOS", 420, 20,500);
+      textAlign(RIGHT, TOP);
+      text("Tiempo restante: " + (this.tiempoLimite - tiempoTranscurrido) + "s", width - 10, 10);
+
       // Condición de derrota por tiempo
-      if (this.tiempo >= 60) {
+      if (tiempoTranscurrido >= this.tiempoLimite) {
         this.estadoJuego = "DERROTA";
-        noStroke();
-        background (220);
         textSize(32);
- fill(27, 167, 108);
- text("¡TIEMPO AGOTADO! PERDISTE.", width / 2, 200);
-  
+        fill(255, 0, 0);
+        textAlign(CENTER, CENTER);
+        text("¡Tiempo agotado! perdiste.", width / 2, height / 2);
+        text("¡Inténtalo de nuevo!, Presionando R", width / 2, 500);
+        noLoop();
       }
     }
-      //  text("¡Inténtalo de nuevo!, Presionando R", width / 2, 500);
-      //  noLoop();
+    return this.estadoJuego;
+  }
 
-  
+
 
   reiniciarJuego() {
+    this.tiempoInicio = millis();
     this.cuadrosTranscurridos = 0;
     this.jugadorGano = false;
     this.objjugador.x = 10;
@@ -127,14 +136,9 @@ class Juego {
       background(255);
       translate(width / 2 - this.objlaberinto.columnas * this.objlaberinto.tamCelda / 2, height / 2 - this.objlaberinto.filas * this.objlaberinto.tamCelda / 2);
       this.actualizar(this.fondoselva);
-     
     }
   }
 
-  mostrarInstrucciones() {
-    background(255);
-    image(this.imginstrucciones, width / 2 - this.imginstrucciones.width / 2, height / 2 - this.imginstrucciones.height / 2);
-  }
   teclas() {
 
     if (keyCode === LEFT_ARROW && this.objjugador.puedeMover(-1, 0)) {
@@ -145,14 +149,15 @@ class Juego {
       this.objjugador.mover(0, -1);
     } else if (keyCode === DOWN_ARROW && this.objjugador.puedeMover(0, 1)) {
       this.objjugador.mover(0, 1);
-    } else if (keyCode === 82 && this.estadoJuego === 4) {
-      this.reiniciarJuego();
-    } else if (keyCode === 82 && this.jugadorGano) {
-      this.reiniciarJuego();
+    } else if (keyCode === 82) {
+      if (this.estadoJuego === "VICTORIA" || this.estadoJuego === "DERROTA") {
+        this.reiniciarJuego();
+      } else if (keyCode === 82 && this.jugadorGano) {
+        this.reiniciarJuego();
+      }
     }
   }
 }
-
 
 class Cupula {
   constructor(x, y, imgcupula) {
@@ -239,7 +244,7 @@ class Laberinto {
   }
 
   dibujarLaberintoConLineas() {
-    stroke(0, 255, 200);
+    stroke(100, 0, 200);
     strokeWeight(3);
 
 
