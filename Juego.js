@@ -81,14 +81,14 @@ class Juego {
       text("¡Has ganado!", width / 2, height / 2);
       textSize(29);
       text("¡Intenta mejorar tu tiempo, juega de nuevo presionando R!", width / 2, 500);
-      noLoop();
+     // noLoop();
     }
 
 
     // Contador de tiempo
     if (this.estadoJuego === "JUEGO") {
       this.cuadrosTranscurridos++;
-      let tiempoTranscurrido = Math.floor((millis() - this.tiempoInicio) / 1000);
+      let tiempoTranscurrido = floor((millis() - this.tiempoInicio) / 1000);
 
       textSize(24);
       fill(255);
@@ -105,7 +105,7 @@ class Juego {
         textAlign(CENTER, CENTER);
         text("¡Tiempo agotado! perdiste.", width / 2, height / 2);
         text("¡Inténtalo de nuevo!, Presionando R", width / 2, 500);
-        noLoop();
+    //    noLoop();
       }
     }
     return this.estadoJuego;
@@ -126,7 +126,7 @@ class Juego {
     for (let i = 0; i < this.elementosComida.length; i++) {
       this.elementosComida[i].recolectado = false;
     }
-    loop();
+ //   loop();
   }
 
   dibujarjuego() {
