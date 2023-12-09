@@ -1,4 +1,4 @@
-||||||||||||||||||class Estado {
+class Estado {
   constructor(presentacion) {
     this.estado = 0;
     this.botones = [
