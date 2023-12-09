@@ -42,7 +42,7 @@ class Presentacion {
         textAlign(CENTER, CENTER);
         text("¡Tiempo agotado! Perdiste.", width / 2, height / 2);
         text("¡Inténtalo de nuevo!, Presionando R", width / 2, 500);
-        noLoop();
+      //  noLoop();
       }
     }
   }
