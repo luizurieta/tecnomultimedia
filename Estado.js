@@ -1,4 +1,4 @@
-class Estado {
+||||||||||||||||||class Estado {
   constructor(presentacion) {
     this.estado = 0;
     this.botones = [
@@ -16,11 +16,13 @@ class Estado {
     for (let i = 0; i < this.botones.length; i++) {
       this.botones[i].mostrar();
     }
+    this.presentacion.imagen.cambiarImagen(this.estado);
+    this.presentacion.imagen.mostrar(0, 0, 800, 800);
     if (this.estado === 0) { //inicio
       noStroke();
       background (200);
       fill(27, 167, 108);
-      this.presentacion.imagen.mostrar(0, 0);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       textSize(20);
       textAlign(CENTER);
       rect(330, 500, 140, 60, 10);
@@ -31,7 +33,8 @@ class Estado {
       text(presentacion.textos[2], width / 2, 640);
     } else if (this.estado === 2) { //llegan a venus
       // btn iniciar va aca
-      background(200);
+      this.presentacion.imagen.cambiarImagen(2);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       textSize(20);
       fill(255, 50);
       noStroke();
@@ -46,14 +49,23 @@ class Estado {
       text(presentacion.textos[6], 46, 510, 180); // op 1
       text(presentacion.textos[7], 535, 510, 200);
     } else if (this.estado === 1) { //CRÉDITOS
-      background(220);
-      fill(247, 50, 0);
-      rect(210, 460, 180, 60, 10);
-      fill(255);
-      textSize(20);
-      text(presentacion.textos[9], 300, 500);
+      this.presentacion.imagen.cambiarImagen(9);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
+      fill (0, 100);
+      rect (50, 50, 700, 700);
+      fill(167, 81, 27);
+      rect(310, 600, 180, 60, 10);
+      fill(255, 100);
+      textSize (28);
+      text(presentacion.textos[9], 400, 640);
+      text(presentacion.textos[20], 400, 300);
+      text(presentacion.textos[21], 380, 380);
+      textSize (32);
+      text(presentacion.textos[2], 400, 100);
+      text(presentacion.textos[19], 400, 150);
     } else if (this.estado === 4) { //FALLECEN - PRIMER FLUJO OPCIÓN 1
-      background(200);
+      this.presentacion.imagen.cambiarImagen(7);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       noStroke();
       textSize (20);
       fill(255, 50);
@@ -65,7 +77,8 @@ class Estado {
       fill(167, 81, 27);
       text(presentacion.textos[9], 345, 620, 120);
     } else if (this.estado === 3) { // TORMENTA MOSNTRUOSA . FLUJO B
-      background(200);
+      this.presentacion.imagen.cambiarImagen(3);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       noStroke ();
       fill(255, 50);
       rect(50, 80, 700, 80);
@@ -80,7 +93,8 @@ class Estado {
       text (presentacion.textos[11], 60, 510, 150);
       text (presentacion.textos[12], 565, 510, 150);
     } else if ( this.estado === 6) {
-      background (200);
+      this.presentacion.imagen.cambiarImagen(8);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       noStroke ();
       fill(255, 50);
       rect(50, 80, 700, 80);
@@ -95,7 +109,8 @@ class Estado {
       text (presentacion.textos[9], 90, 520, 100);
       text (presentacion.textos[16], 565, 520, 150);
     } else if (this.estado === 5 ) {
-      background (200);
+      this.presentacion.imagen.cambiarImagen(1);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       noStroke ();
       textSize (20);
       fill(255, 50);
@@ -108,9 +123,9 @@ class Estado {
       text(presentacion.textos[14], 350, 620, 100);
     } else if (this.estado === 7) {
       background (0); //ACÁ VA EL JUEGO
-       
     } else if ( this.estado === 8) {
-      background (200);
+      this.presentacion.imagen.cambiarImagen(4);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       noStroke ();
       textSize (20);
       fill(255, 50);
@@ -123,7 +138,8 @@ class Estado {
       text(presentacion.textos[14], 350, 620, 100);
     } else if ( this.estado === 9) {
       noStroke ();
-      background (200);
+      this.presentacion.imagen.cambiarImagen(5);
+      this.presentacion.imagen.mostrar(0, 0, 800, 800);
       textSize (20);
       fill(255, 50);
       rect(50, 80, 700, 90);
@@ -132,8 +148,8 @@ class Estado {
       fill(27, 167, 108);
       rect(310, 600, 180, 60, 10);
       fill(167, 81, 27);
-      text(presentacion.textos[9], 350, 620,100);
-    } 
+      text(presentacion.textos[9], 350, 620, 100);
+    }
   }
 
 
@@ -194,10 +210,6 @@ class Estado {
             this.estado =0;
           }
         }
-
-        return;
+        return;|
       }
-  }
-}
-
-}
+    }
