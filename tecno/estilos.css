@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Oswald:wght@500&family=Ubuntu:wght@300&display=swap');
+
+body {
+    font-family: 'Ubuntu'. 'San Serif';
+    font-size: xx-large;
+background-color: darkseagreen;
+}
+
+h1 {
+    font-family: 'Ubuntu', 'San Serif';
+font-size: xx-large;
+    color: saddlebrown;
+}
+h2 {
+text-align: center;
+font-size: xx-large;
+    background-color: black;
+    color: saddlebrown;
+}
+div {
+    width: 800px;
+    max-width: 95%;
+    margin: 0 auto ;
+}
+header{
+    background-color: black;
+    width: 800px;
+    font-size: xx-large;
+    text-align: center;
+}
+nav {
+    width: 2000;;
+background-color: darkseagreen;
+}
+article {
+    width: 800px;}
+
+
+
+
+.portada{
+    width:800px;
+height: auto;}
+nav li {
+    display: inline-block;
+}
+
+nav a {
+    background-color: darkolivegreen;
+    font-size: xx-large;
+font-family: 'Ubuntu';
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+}
+nav a:hover{
+    background-color: mediumseagreen;
+    text-decoration: none;
+    color:dimgrey; 
+   
+}
+html {
+    scroll-behavior: smooth;
+}
